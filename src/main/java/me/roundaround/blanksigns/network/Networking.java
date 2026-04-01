@@ -2,29 +2,31 @@ package me.roundaround.blanksigns.network;
 
 import me.roundaround.blanksigns.generated.Constants;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.network.packet.CustomPayload;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.Identifier;
+import org.jetbrains.annotations.NotNull;
 
 public final class Networking {
-  public static final Identifier PREFERENCE_C2S = Identifier.of(Constants.MOD_ID, "preference_c2s");
+  public static final Identifier PREFERENCE_C2S = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "preference_c2s");
 
   public static void registerC2SPayloads() {
-    PayloadTypeRegistry.playC2S().register(PreferenceC2S.ID, PreferenceC2S.CODEC);
+    PayloadTypeRegistry.serverboundPlay().register(PreferenceC2S.ID, PreferenceC2S.CODEC);
   }
 
-  public record PreferenceC2S(boolean preference) implements CustomPayload {
-    public static final CustomPayload.Id<PreferenceC2S> ID = new CustomPayload.Id<>(PREFERENCE_C2S);
-    public static final PacketCodec<RegistryByteBuf, PreferenceC2S> CODEC = PacketCodec.tuple(
-        PacketCodecs.BOOLEAN,
+  public record PreferenceC2S(boolean preference) implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<PreferenceC2S> ID = new CustomPacketPayload.Type<>(PREFERENCE_C2S);
+    public static final StreamCodec<RegistryFriendlyByteBuf, PreferenceC2S> CODEC = StreamCodec.composite(
+        ByteBufCodecs.BOOL,
         PreferenceC2S::preference,
         PreferenceC2S::new
     );
 
     @Override
-    public Id<PreferenceC2S> getId() {
+    @NotNull
+    public Type<PreferenceC2S> type() {
       return ID;
     }
   }

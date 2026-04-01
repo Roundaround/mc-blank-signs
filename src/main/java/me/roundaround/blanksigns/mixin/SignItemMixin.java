@@ -4,37 +4,36 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
 import me.roundaround.blanksigns.config.BlankSignsConfig;
 import me.roundaround.blanksigns.server.PlayerPreferenceTracker;
-import net.minecraft.block.AbstractSignBlock;
-import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.SignItem;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.SignItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SignBlock;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(SignItem.class)
 public class SignItemMixin {
   @WrapWithCondition(
-      method = "postPlacement", at = @At(
+      method = "updateCustomBlockEntityTag(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/block/state/BlockState;)Z", at = @At(
       value = "INVOKE",
-      target = "Lnet/minecraft/block/AbstractSignBlock;openEditScreen(Lnet/minecraft/entity/player/PlayerEntity;" +
-               "Lnet/minecraft/block/entity/SignBlockEntity;Z)V"
+      target = "Lnet/minecraft/world/level/block/SignBlock;openTextEdit(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/block/entity/SignBlockEntity;Z)V"
   )
   )
   public boolean shouldOpenEditScreen(
-      AbstractSignBlock instance,
-      PlayerEntity player,
+      SignBlock instance,
+      Player player,
       SignBlockEntity blockEntity,
       boolean front,
-      @Local(argsOnly = true) World world
+      @Local(argsOnly = true) Level world
   ) {
     MinecraftServer server = world.getServer();
     if (server == null) {
       return false;
     }
 
-    if (!player.shouldCancelInteraction()) {
+    if (!player.isSecondaryUseActive()) {
       return true;
     }
 

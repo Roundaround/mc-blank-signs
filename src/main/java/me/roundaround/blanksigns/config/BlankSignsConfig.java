@@ -1,10 +1,10 @@
 package me.roundaround.blanksigns.config;
 
 import me.roundaround.blanksigns.generated.Constants;
-import me.roundaround.blanksigns.roundalib.config.ConfigPath;
-import me.roundaround.blanksigns.roundalib.config.manage.ModConfigImpl;
-import me.roundaround.blanksigns.roundalib.config.manage.store.GameScopedFileStore;
-import me.roundaround.blanksigns.roundalib.config.option.BooleanConfigOption;
+import me.roundaround.roundalib.config.ConfigPath;
+import me.roundaround.roundalib.config.manage.ModConfigImpl;
+import me.roundaround.roundalib.config.manage.store.GameScopedFileStore;
+import me.roundaround.roundalib.config.option.BooleanConfigOption;
 
 public class BlankSignsConfig extends ModConfigImpl implements GameScopedFileStore {
   private static BlankSignsConfig instance = null;

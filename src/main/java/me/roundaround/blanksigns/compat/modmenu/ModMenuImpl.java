@@ -4,7 +4,7 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.roundaround.blanksigns.config.BlankSignsConfig;
 import me.roundaround.blanksigns.generated.Constants;
-import me.roundaround.blanksigns.roundalib.client.gui.screen.ConfigScreen;
+import me.roundaround.roundalib.client.gui.screen.ConfigScreen;
 import me.roundaround.gradle.api.annotation.Entrypoint;
 
 @Entrypoint(Entrypoint.MOD_MENU)

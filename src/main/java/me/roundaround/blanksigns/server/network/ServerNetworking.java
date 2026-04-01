@@ -3,7 +3,7 @@ package me.roundaround.blanksigns.server.network;
 import me.roundaround.blanksigns.network.Networking;
 import me.roundaround.blanksigns.server.PlayerPreferenceTracker;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 
 public final class ServerNetworking {
   public static void registerReceivers() {
@@ -11,7 +11,7 @@ public final class ServerNetworking {
   }
 
   private static void handlePreference(Networking.PreferenceC2S payload, ServerPlayNetworking.Context context) {
-    final ServerPlayerEntity player = context.player();
+    final ServerPlayer player = context.player();
     context.server().execute(() -> {
       PlayerPreferenceTracker.getInstance().track(player, payload.preference());
     });

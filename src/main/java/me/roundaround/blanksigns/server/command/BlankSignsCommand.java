@@ -4,27 +4,27 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import me.roundaround.blanksigns.config.BlankSignsConfig;
 import me.roundaround.blanksigns.generated.Constants;
-import net.minecraft.command.DefaultPermissions;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.permissions.Permissions;
 
 public final class BlankSignsCommand {
-  public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-    dispatcher.register(CommandManager.literal(Constants.MOD_ID)
+  public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+    dispatcher.register(Commands.literal(Constants.MOD_ID)
         .then(reloadSub())
         .then(enableSub())
         .then(disableSub()));
   }
 
-  private static LiteralArgumentBuilder<ServerCommandSource> reloadSub() {
-    return CommandManager.literal("reload")
-        .requires((source) -> source.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS))
+  private static LiteralArgumentBuilder<CommandSourceStack> reloadSub() {
+    return Commands.literal("reload")
+        .requires((source) -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
         .executes((context) -> {
           BlankSignsConfig config = BlankSignsConfig.getInstance();
           config.syncWithStore();
-          context.getSource().sendFeedback(
-              () -> Text.translatable(
+          context.getSource().sendSuccess(
+              () -> Component.translatable(
                   "blanksigns.commands.reload",
                   String.valueOf(config.modEnabled.getValue().booleanValue())
               ), true
@@ -33,46 +33,46 @@ public final class BlankSignsCommand {
         });
   }
 
-  private static LiteralArgumentBuilder<ServerCommandSource> enableSub() {
-    return CommandManager.literal("enable")
-        .requires((source) -> source.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS))
+  private static LiteralArgumentBuilder<CommandSourceStack> enableSub() {
+    return Commands.literal("enable")
+        .requires((source) -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
         .executes((context) -> {
           BlankSignsConfig config = BlankSignsConfig.getInstance();
           config.modEnabled.setValue(true);
 
           if (config.isDirty()) {
             config.writeToStore();
-            context.getSource().sendFeedback(
-                () -> Text.translatable(context.getSource().getServer().isSingleplayer() ?
+            context.getSource().sendSuccess(
+                () -> Component.translatable(context.getSource().getServer().isSingleplayer() ?
                     "blanksigns.commands.enable" :
                     "blanksigns.commands.enable.server"), true
             );
             return 0;
           }
 
-          context.getSource().sendFeedback(() -> Text.translatable("blanksigns.commands.enable.noop"), false);
+          context.getSource().sendSuccess(() -> Component.translatable("blanksigns.commands.enable.noop"), false);
           return 1;
         });
   }
 
-  private static LiteralArgumentBuilder<ServerCommandSource> disableSub() {
-    return CommandManager.literal("disable")
-        .requires((source) -> source.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS))
+  private static LiteralArgumentBuilder<CommandSourceStack> disableSub() {
+    return Commands.literal("disable")
+        .requires((source) -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
         .executes((context) -> {
           BlankSignsConfig config = BlankSignsConfig.getInstance();
           config.modEnabled.setValue(false);
 
           if (config.isDirty()) {
             config.writeToStore();
-            context.getSource().sendFeedback(
-                () -> Text.translatable(context.getSource().getServer().isSingleplayer() ?
+            context.getSource().sendSuccess(
+                () -> Component.translatable(context.getSource().getServer().isSingleplayer() ?
                     "blanksigns.commands.disable" :
                     "blanksigns.commands.disable.server"), true
             );
             return 0;
           }
 
-          context.getSource().sendFeedback(() -> Text.translatable("blanksigns.commands.disable.noop"), false);
+          context.getSource().sendSuccess(() -> Component.translatable("blanksigns.commands.disable.noop"), false);
           return 1;
         });
   }

@@ -1,15 +1,16 @@
-# Roundaround's Blank Signs
+![Blank Signs](https://imgur.com/9AynYEn.png)
 
-<img src="https://img.shields.io/badge/Loader-Fabric-%23313e51?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/MC-1.21--1.21.4-%23313e51?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/Side-Server-%23313e51?style=for-the-badge"/>
+![](https://img.shields.io/badge/Loader-Fabric-%23313e51?style=for-the-badge)
+![](https://img.shields.io/badge/MC-26.1%20|%201.21-%23313e51?style=for-the-badge)
+![](https://img.shields.io/badge/Side-Server-%23313e51?style=for-the-badge)
 
-Place signs without opening the edit screen!
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/blank-signs?style=flat&logo=modrinth&color=00AF5C)](https://modrinth.com/mod/blank-signs)
+[![GitHub Repo stars](https://img.shields.io/github/stars/Roundaround/mc-fabric-blank-signs?style=flat&logo=github)](https://github.com/Roundaround/mc-fabric-blank-signs)
 
-## Download
+[![Support me on Ko-fi](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/donate/kofi-singular-alt_vector.svg)](https://ko-fi.com/roundaround)
 
-https://modrinth.com/mod/blank-signs
+---
 
-## License
+Place signs without opening the edit screen by sneaking! Comes with a configuration file/menu to disable the behavior and full multiplayer server compatibility!
 
-This mod is available under the MIT license. Please see the LICENSE file for more info.
+On a multiplayer server, if the mod is missing or disabled, then the configuration value set on the client (each player's local game) will not matter. However, if the mod is installed and enabled on the server, the players can then opt out of the behavior by installing the mod themselves and disabling it in their local configuration.
