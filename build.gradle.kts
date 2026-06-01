@@ -10,6 +10,7 @@ allay {
   homepage.set("https://modrinth.com/mod/blank-signs")
   repository.set("https://github.com/Roundaround/mc-fabric-blank-signs")
   issues.set("https://github.com/Roundaround/mc-fabric-blank-signs/issues")
+  logoFile.set("assets/blanksigns/banner.png")
 
   modrinth {
     projectId.set("blank-signs")
