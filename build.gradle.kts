@@ -8,8 +8,8 @@ allay {
   authors.set(listOf("Roundaround"))
   license.set("MIT")
   homepage.set("https://modrinth.com/mod/blank-signs")
-  repository.set("https://github.com/Roundaround/mc-fabric-blank-signs")
-  issues.set("https://github.com/Roundaround/mc-fabric-blank-signs/issues")
+  repository.set("https://github.com/Roundaround/mc-blank-signs")
+  issues.set("https://github.com/Roundaround/mc-blank-signs/issues")
   logoFile.set("assets/blanksigns/banner.png")
 
   modrinth {
