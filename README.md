@@ -1,17 +1,35 @@
 ![Blank Signs](https://imgur.com/9AynYEn.png)
 
-![](https://img.shields.io/badge/Loader-Fabric-313e51?style=for-the-badge)
-![](https://img.shields.io/badge/MC-26.3%20|%2026.2%20|%2026.1%20|%201.21-313e51?style=for-the-badge)
-![](https://img.shields.io/badge/Side-Server-313e51?style=for-the-badge)
-
 [![Modrinth Downloads](https://img.shields.io/modrinth/dt/blank-signs?style=flat&logo=modrinth&color=00AF5C)](https://modrinth.com/mod/blank-signs)
 [![CurseForge Downloads](https://img.shields.io/curseforge/dt/1501496?style=flat&logo=curseforge&color=F16436)](https://www.curseforge.com/minecraft/mc-mods/blank-signs)
 [![GitHub Repo stars](https://img.shields.io/github/stars/Roundaround/mc-blank-signs?style=flat&logo=github)](https://github.com/Roundaround/mc-blank-signs)
 
 [![Support me on Ko-fi](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/donate/kofi-singular-alt_vector.svg)](https://ko-fi.com/roundaround)
 
----
+Place signs without opening the edit screen by sneaking, with a config toggle and full multiplayer server compatibility.
 
-Place signs without opening the edit screen by sneaking! Comes with a configuration file/menu to disable the behavior and full multiplayer server compatibility!
+## Installing
 
-On a multiplayer server, if the mod is missing or disabled, then the configuration value set on the client (each player's local game) will not matter. However, if the mod is installed and enabled on the server, the players can then opt out of the behavior by installing the mod themselves and disabling it in their local configuration.
+Grab a build from [Modrinth](https://modrinth.com/mod/blank-signs) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/blank-signs). Fabric builds need [Fabric API](https://modrinth.com/mod/fabric-api).
+
+## Building from source
+
+```sh
+./gradlew build
+```
+
+Dev runs are per loader: `:fabric:runClient`, and the `runServer` equivalents. Game tests run with `./gradlew :fabric:runClientGameTests` and `:fabric:runServerGameTests`.
+
+The build is an [Allay](https://github.com/Roundaround/allay) consumer and bundles [Trove](https://github.com/Roundaround/trove).
+
+## Contributing
+
+Issues and pull requests are welcome at [the issue tracker](https://github.com/Roundaround/mc-blank-signs/issues).
+
+- Branch from `main`, which tracks the newest supported Minecraft version. Older lines live on their own version-named branches.
+- Keep loader-agnostic code in `common/`; only genuinely loader-specific glue belongs in a loader subproject.
+- Run `./gradlew build` plus the Fabric game tests before opening a PR, and add a changelog entry under `changelogs/` named for the version you're targeting.
+
+## License
+
+[MIT](LICENSE)
